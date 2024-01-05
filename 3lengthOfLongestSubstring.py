@@ -3,22 +3,16 @@ class Solution: #Time Limit
         if len(s) == 0:
            return 0
 
-        mx = 1
-        for i in range(len(s)):
-            d = ''
-            cnt = 0
-            for j in range(i, len(s)):
-                if s[j] in d:
-                    mx = max(mx, cnt)
-                    cnt = 0
-                    d = ''
-                else:
-                    d += s[j]
-                    cnt += 1
+        checklist = {}
+        st = 0
+        leng = 0
+        for i, v in enumerate(s):
+            if v in checklist:
+                st = max(st, checklist[v] + 1)
+            checklist[v] = i
+            leng = max(leng, i - st + 1)
 
-            mx = max(mx, cnt)
-
-        return mx
+        return leng
 
 s = Solution()
 
